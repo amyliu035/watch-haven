@@ -20,9 +20,18 @@ export default function MovieForm({ onMovieAdded }: { onMovieAdded: () => void }
     
     const relatedUrls = urls.split(',').map(url => url.trim()).filter(url => url !== '')
 
+    const { data: { user } } = await supabase.auth.getUser()
+    
+    if (!user) {
+      setError("You must be logged in to add a movie.")
+      setLoading(false)
+      return
+    }
+
     const { error: insertError } = await supabase
       .from('watched_movies')
       .insert({
+        user_id: user.id,
         title,
         rating: parseInt(rating),
         related_urls: relatedUrls.length > 0 ? relatedUrls : null
