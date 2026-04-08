@@ -19,3 +19,5 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_WATCH_HAVEN_BAE2D }}
           projectId: watch-haven-bae2d
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
